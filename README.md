@@ -26,10 +26,18 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
     3.crash 文件内第一行 Incident Identifier 就是该 crash 文件的 UUID。
 
 
+dSYM工具使用步骤:
+1.将打包发布软件时的xcarchive文件拖入软件窗口内的任意位置(支持多个文件同时拖入，注意：文件名不要包含空格)
+2.选中任意一个版本的xcarchive文件，右边会列出该xcarchive文件支持的CPU类型，选中错误对应的CPU类型
+3.对比错误给出的UUID和工具界面中给出的UUID是否一致。
+4.将错误地址输入工具的文本框中，点击分析。
+![dSYMToos][3]
 
+[Mac app下载地址][6]
 
 [1]: https://itunes.apple.com/cn/app/kang-da-yu-zhen-nu-ren-bao/id707364888?l=en&mt=8
 [2]: http://bcs.duapp.com/answerhuang/blog/errorInfo.png
 [3]: http://bcs.duapp.com/answerhuang/blog/dsymTool.png
 [4]: http://bcs.duapp.com/answerhuang/blog/crashUUID.png
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
+[6]: http://pan.baidu.com/s/1dD9u9qx
