@@ -14,6 +14,7 @@ class AHDropTarget(wx.FileDropTarget):
         self.fileList = []
         for filename in filenames:
             print os.path.basename(filename)
+            #TODO: 增加对dSYM文件的支持
             if filename.endswith('xcarchive'):
                 self.fileList.append(filename)
 

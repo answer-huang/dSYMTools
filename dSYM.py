@@ -34,6 +34,7 @@ class AHFrame(wx.Frame):
 
         #创建工具栏
         toolbar = self.CreateToolBar()
+        #TODO: 图片改成相对路径
         toolbar.AddSimpleTool(1, wx.Image('about.png', wx.BITMAP_TYPE_PNG).ConvertToBitmap(), "关于我", "")
         toolbar.AddSeparator()
         toolbar.Realize()  #准备显示工具栏
