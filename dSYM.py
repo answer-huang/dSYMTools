@@ -161,17 +161,22 @@ class AHFrame(wx.Frame):
 
     #获取最后需要的文件地址
     def getFilePath(self, rootPath):
-        dsymsPath = os.path.join(rootPath,'dSYMs')
-        listFiles = os.listdir(dsymsPath)
-        for fileName in listFiles:
-            if fileName.endswith('dSYM'):
-                #dsym文件路径
-                self.dsymFilePath = os.path.join(dsymsPath, fileName)
-                appPath = os.path.join(self.dsymFilePath,'Contents/Resources/DWARF')
-                if os.path.isdir(appPath):
-                    if len(os.listdir(appPath)) is not 0:
-                        #命令行中需要的文件路径
-                        self.appFilePath = os.path.join(appPath,fileName.split(".")[0])
+        if rootPath.endswith("dSYM"):
+            self.dsymFilePath = rootPath
+            fileName = os.path.basename(rootPath)
+        else:
+            dsymsPath = os.path.join(rootPath,'dSYMs')
+            listFiles = os.listdir(dsymsPath)
+            for fileName in listFiles:
+                if fileName.endswith('dSYM'):
+                    #dsym文件路径
+                    self.dsymFilePath = os.path.join(dsymsPath, fileName)
+
+        appPath = os.path.join(self.dsymFilePath,'Contents/Resources/DWARF')
+        if os.path.isdir(appPath):
+            if len(os.listdir(appPath)) is not 0:
+                #命令行中需要的文件路径
+                self.appFilePath = os.path.join(appPath,fileName.split(".")[0])
 
     #显示关于我的界面
     def OnAboutMe(self, event):
