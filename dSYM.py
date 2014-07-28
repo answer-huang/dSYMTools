@@ -35,7 +35,7 @@ class AHFrame(wx.Frame):
         #创建工具栏
         toolbar = self.CreateToolBar()
         #TODO: 图片改成相对路径
-        toolbar.AddSimpleTool(1, wx.Image('about.png', wx.BITMAP_TYPE_PNG).ConvertToBitmap(), "关于我", "")
+        toolbar.AddSimpleTool(1, wx.Image('./about.png', wx.BITMAP_TYPE_PNG).ConvertToBitmap(), "关于我", "")
         toolbar.AddSeparator()
         toolbar.Realize()  #准备显示工具栏
         wx.EVT_TOOL(self, 1, self.OnAboutMe)
@@ -51,11 +51,11 @@ class AHFrame(wx.Frame):
         self.vbox = wx.BoxSizer(wx.VERTICAL)
 
 
-        self.description = wx.StaticText(self.panel, -1, u'请将xcarchive文件拖拽到窗口中并选中任意一个版本进行分析',  style=wx.TE_WORDWRAP|wx.TE_MULTILINE)
-        self.fileTypeLB = wx.ListBox(self.panel, -1,  style=wx.LB_EXTENDED)
+        self.description = wx.StaticText(self.panel, -1, u'请将xcarchive文件拖拽到窗口中并选中任意一个版本进行分析',  style=wx.TE_WORDWRAP | wx.TE_MULTILINE)
+        self.fileTypeLB = wx.ListBox(self.panel, -1,  style = wx.LB_EXTENDED)
         self.fileTypeLB.SetBackgroundColour(wx.Colour(232, 232, 232, 255))
         self.Bind(wx.EVT_LISTBOX, self.ListBoxClick, self.fileTypeLB)
-        self.Bind(wx.EVT_LISTBOX_DCLICK, self.ListBoxDoubleClick, self.fileTypeLB)
+        self.Bind(wx.EVT_LISTBOX_DCLICK, self.ListBoxClick, self.fileTypeLB)
 
         self.fileTypeLBhbox = wx.BoxSizer(wx.HORIZONTAL)
         self.fileTypeLBhbox.Add(self.fileTypeLB, 1, wx.EXPAND)
@@ -107,12 +107,6 @@ class AHFrame(wx.Frame):
 
     #文件列表单击事件
     def ListBoxClick(self, event):
-        self.selectedArchiveFilePath = self.filesList[event.GetSelection()]
-        self.getFilePath(self.selectedArchiveFilePath)
-        self.getArchiveUUID()
-
-    #文件列表双击事件
-    def ListBoxDoubleClick(self, event):
         self.selectedArchiveFilePath = self.filesList[event.GetSelection()]
         self.getFilePath(self.selectedArchiveFilePath)
         self.getArchiveUUID()
@@ -177,7 +171,7 @@ class AHFrame(wx.Frame):
                 if os.path.isdir(appPath):
                     if len(os.listdir(appPath)) is not 0:
                         #命令行中需要的文件路径
-                        self.appFilePath = os.path.join(appPath,os.listdir(appPath)[0])
+                        self.appFilePath = os.path.join(appPath,fileName.split(".")[0])
 
     #显示关于我的界面
     def OnAboutMe(self, event):
