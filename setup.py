@@ -10,11 +10,11 @@ from setuptools import setup
 
 APP = ['dSYM.py']
 OPTIONS = {
-    'includes': ['about.png'],
+    #'includes': ['about.png'],
     'iconfile': 'dSYMIcns.icns',
-    'plist': {'CFBundleShortVersionString': '0.1.0',}
+    'plist': {'CFBundleShortVersionString': '1.0.1', }
 }
-DATA_FILES = ['about.png', 'avatar.jpg']
+DATA_FILES = ['about.png', 'avatar.jpg', 'dsym.db', 'RunScript.py']
 
 setup(
     app = APP,

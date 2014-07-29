@@ -10,6 +10,7 @@ from MyInfo import AboutMe
 from AHDropTarget import AHDropTarget
 import os
 import subprocess
+import sqlite3
 
 class AHFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -34,7 +35,6 @@ class AHFrame(wx.Frame):
 
         #创建工具栏
         toolbar = self.CreateToolBar()
-        #TODO: 图片改成相对路径
         toolbar.AddSimpleTool(1, wx.Image('./about.png', wx.BITMAP_TYPE_PNG).ConvertToBitmap(), "关于我", "")
         toolbar.AddSeparator()
         toolbar.Realize()  #准备显示工具栏
@@ -51,9 +51,11 @@ class AHFrame(wx.Frame):
         self.vbox = wx.BoxSizer(wx.VERTICAL)
 
 
-        self.description = wx.StaticText(self.panel, -1, u'请将xcarchive文件拖拽到窗口中并选中任意一个版本进行分析',  style=wx.TE_WORDWRAP | wx.TE_MULTILINE)
+        self.description = wx.StaticText(self.panel, -1, u'请将dSYM文件拖拽到窗口中并选中任意一个版本进行分析',  style=wx.TE_WORDWRAP | wx.TE_MULTILINE)
         self.fileTypeLB = wx.ListBox(self.panel, -1,  style = wx.LB_EXTENDED)
         self.fileTypeLB.SetBackgroundColour(wx.Colour(232, 232, 232, 255))
+        #TODO: 从sqlite中读取文件路径
+        self.getdSYMFileFromSqlite()
         self.Bind(wx.EVT_LISTBOX, self.ListBoxClick, self.fileTypeLB)
         self.Bind(wx.EVT_LISTBOX_DCLICK, self.ListBoxClick, self.fileTypeLB)
 
@@ -64,7 +66,7 @@ class AHFrame(wx.Frame):
         self.vbox.SetItemMinSize(self.fileTypeLBhbox, (200, 100))
         self.vbox.Add((-1, 10))
 
-        self.UUIDString = wx.StaticText(self.panel, -1, u'选中xcarchive的UUID:')
+        self.UUIDString = wx.StaticText(self.panel, -1, u'选中dSYM文件的UUID:')
         self.vbox.Add(self.UUIDString, 0, wx.EXPAND | wx.ALL, 5)
 
         self.UUIDStringText = wx.TextCtrl(self.panel, -1)
@@ -159,6 +161,15 @@ class AHFrame(wx.Frame):
     def ShowFileType(self):
         self.fileTypeLB.Set(list([os.path.basename(filepath) for filepath in self.filesList]))
 
+    def getdSYMFileFromSqlite(self):
+        if os.path.exists('dsym.db'):
+            cx = sqlite3.connect('dsym.db')
+            cu = cx.cursor()
+            ##查询
+            cu.execute("select * from archives")
+            self.filesList = [dsym[0] for dsym in cu.fetchall()]
+            self.ShowFileType()
+
     #获取最后需要的文件地址
     def getFilePath(self, rootPath):
         if rootPath.endswith("dSYM"):
@@ -184,7 +195,7 @@ class AHFrame(wx.Frame):
         aboutMe.ShowModal()
         aboutMe.Destroy()
 
-versions = '1.0.0'
+versions = '1.0.1'
 if __name__ == '__main__':
     app = wx.App(redirect=False)
     frame = AHFrame(None, 'dSYM文件分析工具' + versions)
