@@ -2,20 +2,20 @@
 
 ###Version 1.0.1       2014-07-29
 
-1.增加对dSYM文件的支持，直接将xcarchive或dSYM文件拖入窗口中即可。
+1.增加对 dSYM 文件的支持，直接将 xcarchive 或 dSYM 文件拖入窗口中即可。
 
-2.增加项目编译时自动将dSYM文件保存到项目目录下的脚本(如果选中 Run script only when installing 则只会在每次 Archive 的时候保存 dSYM 文件到根目录)，并将dSYM路径写入应用的数据库中，下次打开软件时，自动导入保存的dSYM文件路径。（脚本：`/usr/bin/python /Applications/dSYM.app/Contents/Resources/RunScript.py`）
+2.增加项目编译时自动将 dSYM 文件保存到项目目录下的脚本(如果选中 Run script only when installing 则只会在每次 Archive 的时候保存 dSYM 文件到根目录)，并将 dSYM 路径写入应用的数据库中，下次打开软件时，自动导入保存的 dSYM 文件路径。（脚本：`/usr/bin/python /Applications/dSYM.app/Contents/Resources/RunScript.py`）
 
 ![runScript][8]
 
 
-3.修复dSYM根据和版本管理软件冲突的bug。
+3.修复 dSYM 根据和版本管理软件冲突的 bug。
 
 
 ###Version 1.0.0       2014-06-26
 
 
-1.软件基本功能完成（仅支持xcarchive文件）。
+1.软件基本功能完成（仅支持 xcarchive 文件）。
 
 
 #项目简介
