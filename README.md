@@ -2,9 +2,12 @@
 
 ###Version 1.0.1       2014-07-29
 
-1.增加对dSYM文件的支持。
+1.增加对dSYM文件的支持，直接将xcarchive或dSYM文件拖入窗口中即可。
 
-2.增加项目编译时自动将dSYM文件保存到项目目录下的脚本，并将dSYM路径写入应用的数据库中。
+2.增加项目编译时自动将dSYM文件保存到项目目录下的脚本(如果选中 Run script only when installing 则只会在每次 Archive 的时候保存 dSYM 文件到根目录)，并将dSYM路径写入应用的数据库中，下次打开软件时，自动导入保存的dSYM文件路径。（脚本：`/usr/bin/python /Applications/dSYM.app/Contents/Resources/RunScript.py`）
+
+![runScript][8]
+
 
 3.修复dSYM根据和版本管理软件冲突的bug。
 
@@ -70,3 +73,4 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
 [6]: http://pan.baidu.com/s/1nt3Fv2T
 [7]: https://github.com/answer-huang/dSYMTools
+[8]: http://bcs.duapp.com/answerhuang/blog/runScript.png
