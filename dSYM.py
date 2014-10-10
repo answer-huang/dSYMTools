@@ -167,7 +167,14 @@ class AHFrame(wx.Frame):
             cu = cx.cursor()
             ##查询
             cu.execute("select * from archives")
-            self.filesList = [dsym[0] for dsym in cu.fetchall()]
+            for dsym in cu.fetchall():
+                if not os.path.exists(dsym[0]):
+                    execSql = "delete from archives where file_path ='%s'" % dsym[0]
+                    cu.execute(execSql)
+                    cx.commit()
+                else:
+                    self.filesList.append(dsym[0])#[dsym[0] for dsym in cu.fetchall() if os.path.exists(dsym[0])]
+            print self.filesList
             self.ShowFileType()
 
     #获取最后需要的文件地址
