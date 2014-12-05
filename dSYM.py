@@ -194,7 +194,7 @@ class AHFrame(wx.Frame):
         if os.path.isdir(appPath):
             if len(os.listdir(appPath)) is not 0:
                 #命令行中需要的文件路径
-                self.appFilePath = os.path.join(appPath,fileName.split(".")[0])
+                self.appFilePath = os.path.join(appPath,os.listdir(appPath)[0])
 
     #显示关于我的界面
     def OnAboutMe(self, event):
