@@ -84,6 +84,14 @@ class AHFrame(wx.Frame):
         hbox3.Add(self.memAddress, 1, wx.EXPAND)
         self.vbox.Add(hbox3, 0, wx.EXPAND | wx.ALL, 5)
 
+        self.slideAddressStr = wx.StaticText(self.panel, -1, u'请输入 Slide Address:')
+        self.vbox.Add(self.slideAddressStr, 0, wx.ALL, 5)
+
+        self.slideAddress = wx.TextCtrl(self.panel, -1)
+        hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+        hbox3.Add(self.slideAddress, 1, wx.EXPAND)
+        self.vbox.Add(hbox3, 0, wx.EXPAND | wx.ALL, 5)
+
         self.fileBtn = wx.Button(self.panel, -1, u'分析')
         self.fileBtn.Bind(wx.EVT_BUTTON, self.startCalc)
         hbox4 = wx.BoxSizer(wx.HORIZONTAL)
@@ -143,7 +151,7 @@ class AHFrame(wx.Frame):
 
     def startCalc(self, event):
         if self.memAddress.GetValue():
-            comString = 'xcrun atos -arch ' + self.selectedArchiveType + ' -o ' + str(self.appFilePath) + ' ' + self.memAddress.GetValue()
+            comString = 'xcrun atos -arch ' + self.selectedArchiveType + ' -o ' + str(self.appFilePath) + ' -l ' + self.slideAddress.GetValue() + ' ' + self.memAddress.GetValue()
             tmp = os.popen(comString).readlines()
             self.maybeReasonContent.SetValue(tmp[0])
 
