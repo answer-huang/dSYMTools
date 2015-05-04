@@ -71,6 +71,6 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 [3]: http://bcs.duapp.com/answerhuang/blog/dsymTool.png
 [4]: http://bcs.duapp.com/answerhuang/blog/crashUUID.png
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
-[6]: http://pan.baidu.com/s/1bnkxPvT
+[6]: http://pan.baidu.com/s/1o65gV4Q
 [7]: https://github.com/answer-huang/dSYMTools
 [8]: http://bcs.duapp.com/answerhuang/blog/runScript.png
