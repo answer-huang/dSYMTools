@@ -210,7 +210,7 @@ class AHFrame(wx.Frame):
         aboutMe.ShowModal()
         aboutMe.Destroy()
 
-versions = '1.0.1'
+versions = '1.0.2'
 if __name__ == '__main__':
     app = wx.App(redirect=False)
     frame = AHFrame(None, 'dSYM文件分析工具' + versions)
