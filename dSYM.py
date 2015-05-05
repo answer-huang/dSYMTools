@@ -123,7 +123,7 @@ class AHFrame(wx.Frame):
 
     #获取文件UUID
     def getArchiveUUID(self):
-        comString = 'dwarfdump --uuid ' + self.dsymFilePath
+        comString = 'dwarfdump --uuid ' + '"' +self.dsymFilePath + '"'
         lines = os.popen(comString).readlines()
         self.archiveUUIDDic = {}
         for line in lines:
