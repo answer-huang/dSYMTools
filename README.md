@@ -1,5 +1,8 @@
 #更新：
 
+###Version 1.0.2       2015-05-05
+1.由于在 arm64 上 Slide address 变化，现需要提供 Slide address，不然得不到异常地址。
+
 ###Version 1.0.1       2014-07-29
 
 1.增加对 dSYM 文件的支持，直接将 xcarchive 或 dSYM 文件拖入窗口中即可。
