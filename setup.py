@@ -1,4 +1,7 @@
 #coding=utf-8
+
+#打包命令 : python setup.py py2app
+
 __author__ = 'answer-huang'
 
 import sys

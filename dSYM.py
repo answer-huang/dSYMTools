@@ -151,7 +151,7 @@ class AHFrame(wx.Frame):
 
     def startCalc(self, event):
         if self.memAddress.GetValue():
-            comString = 'xcrun atos -arch ' + self.selectedArchiveType + ' -o ' + str(self.appFilePath) + ' -l ' + self.slideAddress.GetValue() + ' ' + self.memAddress.GetValue()
+            comString = 'xcrun atos -arch ' + self.selectedArchiveType + ' -o "' + str(self.appFilePath) + '" -l ' + self.slideAddress.GetValue() + ' ' + self.memAddress.GetValue()
             tmp = os.popen(comString).readlines()
             self.maybeReasonContent.SetValue(tmp[0])
 
