@@ -1,4 +1,6 @@
 #更新：
+###Version 1.0.3       2015-05-16
+1.解决文件路径中不能包含空格的 bug。
 
 ###Version 1.0.2       2015-05-05
 1.由于在 arm64 上 Slide address 变化，现需要提供 Slide address，不然得不到异常地址。
@@ -62,7 +64,7 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 
 3.对比错误给出的UUID和工具界面中给出的UUID是否一致。
 
-4.将错误地址输入工具的文本框中，点击分析。
+4.将错误地址以及 Slide Address 输入工具的文本框中，点击分析。
 
 ![dSYMToos][3]
 
@@ -74,6 +76,6 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 [3]: http://bcs.duapp.com/answerhuang/blog/dsymTool.png
 [4]: http://bcs.duapp.com/answerhuang/blog/crashUUID.png
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
-[6]: http://pan.baidu.com/s/1ntzJsMH
+[6]: http://pan.baidu.com/s/1mg01Qha
 [7]: https://github.com/answer-huang/dSYMTools
 [8]: http://bcs.duapp.com/answerhuang/blog/runScript.png

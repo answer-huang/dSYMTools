@@ -22,11 +22,14 @@ class AboutMe(wx.Dialog):
         wx.StaticText(self, -1, '微博:', pos=(45, 170))
         wx.HyperlinkCtrl(self, -1, 'answer-huang', 'http://weibo.com/u/1623064627', pos=(85, 170))
 
-        wx.StaticText(self, -1, '邮箱:', pos=(45, 200))
-        wx.HyperlinkCtrl(self, -1, 'aihoo91@gmail.com', 'mailto:aihoo91@gmail.com', pos=(85, 200))
+        # wx.StaticText(self, -1, '邮箱:', pos=(45, 200))
+        # wx.HyperlinkCtrl(self, -1, 'aihoo91@gmail.com', 'mailto:aihoo91@gmail.com', pos=(85, 200))
 
-        wx.StaticText(self, -1, '博客:', pos=(45, 230))
-        wx.HyperlinkCtrl(self, -1, 'answerhuang.duapp.com', 'http://answerhuang.duapp.com', pos=(85, 230))
+        wx.StaticText(self, -1, '博客:', pos=(45, 200))
+        wx.HyperlinkCtrl(self, -1, 'answerhuang.duapp.com', 'http://answerhuang.duapp.com', pos=(85, 200))
+
+        wx.StaticText(self, -1, 'GitHub:', pos=(28, 230))
+        wx.HyperlinkCtrl(self, -1, 'dSYMTools', 'https://github.com/answer-huang/dSYMTools', pos=(85, 230))
 
     def _create_round_corner_mask(self, size, radius, border=0):
         (w, h) = size
