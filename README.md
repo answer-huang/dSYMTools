@@ -50,7 +50,9 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
     2.查看 xx.app.dSYM 文件的 UUID ，在 terminal 中输入命令：
     dwarfdump --uuid xx.app.dSYM 
 
-    3.crash 文件内第一行 Incident Identifier 就是该 crash 文件的 UUID。
+    3.crash 文件内 Binary Images: 下面一行中 <> 内的 e86bcc8875b230279c962186b80b466d  就是该 crash 文件的 UUID，而第一个地址 0x1000ac000 便是 slide address:
+    Binary Images:
+    0x1000ac000 - 0x100c13fff Example arm64  <e86bcc8875b230279c962186b80b466d> /var/containers/Bundle/Application/99EE6ECE-4CEA-4ADD-AE8D-C4B498886D22/Example.app/Example
 
 
 #dSYM工具
@@ -79,3 +81,5 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 [6]: http://pan.baidu.com/s/1mg01Qha
 [7]: https://github.com/answer-huang/dSYMTools
 [8]: http://answerhuang.bj.bcebos.com/blog/runScript.png
+
+
