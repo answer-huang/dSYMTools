@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AboutWindowController">
+            <connections>
+                <outlet property="blog" destination="s1f-VV-Dn4" id="6Zz-x8-Cdg"/>
+                <outlet property="gitHub" destination="yOy-gg-kfl" id="x3i-Dd-oRs"/>
+                <outlet property="weibo" destination="ReA-bG-yD3" id="YNm-2L-Yda"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="关于" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="282" height="359"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="282" height="359"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHr-QJ-18X">
+                        <rect key="frame" x="91" y="249" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="NCG-2O-T4D"/>
+                            <constraint firstAttribute="height" constant="100" id="VVg-cP-2Ly"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="avatar" id="vEt-Qi-pOR"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="wantsLayer" value="YES"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="50"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2ta-kj-eVC" userLabel="weibo">
+                        <rect key="frame" x="30" y="192" width="42" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="微博 : " id="nYY-Ha-Eds">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ReA-bG-yD3">
+                        <rect key="frame" x="78" y="192" width="91" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="answer-huang" allowsEditingTextAttributes="YES" id="Qds-TL-bK5">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9cf-VA-XGP" userLabel="blog">
+                        <rect key="frame" x="30" y="155" width="42" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="博客 : " id="jfx-7D-0Pj">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s1f-VV-Dn4">
+                        <rect key="frame" x="78" y="155" width="198" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="http://answerhuang.duapp.com/" allowsEditingTextAttributes="YES" id="tGh-6g-DXm">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RDy-mr-jcf" userLabel="github">
+                        <rect key="frame" x="14" y="118" width="58" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="GitHub : " id="7qK-8E-PMG">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yOy-gg-kfl">
+                        <rect key="frame" x="78" y="119" width="68" height="16"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="dSYMTools" allowsEditingTextAttributes="YES" id="dZ2-rd-p9c">
+                            <font key="font" metaFont="cellTitle"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vKa-Vh-RE6" userLabel="ok">
+                        <rect key="frame" x="103" y="71" width="75" height="32"/>
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zBu-m3-uq7">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="close:" target="-2" id="U1z-C9-Mr2"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vKa-Vh-RE6" firstAttribute="top" secondItem="yOy-gg-kfl" secondAttribute="bottom" constant="20" id="3y8-X1-d9d"/>
+                    <constraint firstItem="9cf-VA-XGP" firstAttribute="trailing" secondItem="2ta-kj-eVC" secondAttribute="trailing" id="88o-y0-xUP"/>
+                    <constraint firstItem="DHr-QJ-18X" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="DSe-xE-fVH"/>
+                    <constraint firstItem="yOy-gg-kfl" firstAttribute="top" secondItem="s1f-VV-Dn4" secondAttribute="bottom" constant="20" id="FiO-tL-WUp"/>
+                    <constraint firstItem="s1f-VV-Dn4" firstAttribute="top" secondItem="ReA-bG-yD3" secondAttribute="bottom" constant="20" id="Hcn-ON-h0V"/>
+                    <constraint firstItem="9cf-VA-XGP" firstAttribute="top" secondItem="2ta-kj-eVC" secondAttribute="bottom" constant="20" id="KIr-Jy-9w5"/>
+                    <constraint firstItem="ReA-bG-yD3" firstAttribute="centerY" secondItem="2ta-kj-eVC" secondAttribute="centerY" id="Si6-pp-8qB"/>
+                    <constraint firstItem="2ta-kj-eVC" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" constant="-90" id="XdV-Vk-mfL"/>
+                    <constraint firstItem="yOy-gg-kfl" firstAttribute="leading" secondItem="s1f-VV-Dn4" secondAttribute="leading" id="c9O-nl-HNb"/>
+                    <constraint firstItem="s1f-VV-Dn4" firstAttribute="leading" secondItem="ReA-bG-yD3" secondAttribute="leading" id="dDw-Jv-0h1"/>
+                    <constraint firstItem="ReA-bG-yD3" firstAttribute="leading" secondItem="2ta-kj-eVC" secondAttribute="trailing" constant="10" id="eSK-rB-8Ro"/>
+                    <constraint firstItem="RDy-mr-jcf" firstAttribute="top" secondItem="9cf-VA-XGP" secondAttribute="bottom" constant="20" id="kwR-bu-R5K"/>
+                    <constraint firstItem="2ta-kj-eVC" firstAttribute="top" secondItem="DHr-QJ-18X" secondAttribute="bottom" constant="40" id="lmP-x8-cEM"/>
+                    <constraint firstItem="vKa-Vh-RE6" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="uJ3-vj-KEJ"/>
+                    <constraint firstItem="DHr-QJ-18X" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="10" id="uah-R6-KA4"/>
+                    <constraint firstItem="RDy-mr-jcf" firstAttribute="trailing" secondItem="9cf-VA-XGP" secondAttribute="trailing" id="zIQ-Sc-kyG"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-265" y="275.5"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="avatar" width="491" height="491"/>
+    </resources>
+</document>

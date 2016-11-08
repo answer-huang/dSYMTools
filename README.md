@@ -1,4 +1,7 @@
 #更新：
+###Version 1.0.4       2016-11-08
+1.使用 Objective-C 重写应用。
+2.建议都使用此版本。
 ###Version 1.0.3       2015-05-16
 1.解决文件路径中不能包含空格的 bug。
 
@@ -9,12 +12,8 @@
 
 1.增加对 dSYM 文件的支持，直接将 xcarchive 或 dSYM 文件拖入窗口中即可。
 
-2.增加项目编译时自动将 dSYM 文件保存到项目目录下的脚本(如果选中 Run script only when installing 则只会在每次 Archive 的时候保存 dSYM 文件到根目录)，并将 dSYM 路径写入应用的数据库中，下次打开软件时，自动导入保存的 dSYM 文件路径。（脚本：`/usr/bin/python /Applications/dSYM.app/Contents/Resources/RunScript.py`）
 
-![runScript][8]
-
-
-3.修复 dSYM 根据和版本管理软件冲突的 bug。
+2.修复 dSYM 根据和版本管理软件冲突的 bug。
 
 
 ###Version 1.0.0       2014-06-26
@@ -80,6 +79,5 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
 [6]: http://pan.baidu.com/s/1mg01Qha
 [7]: https://github.com/answer-huang/dSYMTools
-[8]: http://answerhuang.bj.bcebos.com/blog/runScript.png
 
 
