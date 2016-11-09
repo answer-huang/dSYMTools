@@ -69,15 +69,13 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 
 ![dSYMToos][3]
 
-[Mac app下载地址][6]
 
-[项目源码地址][7]
+[项目源码地址][6]
 [1]: https://itunes.apple.com/cn/app/kang-da-yu-zhen-nu-ren-bao/id707364888?l=en&mt=8
 [2]: http://answerhuang.bj.bcebos.com/blog/errorInfo.png
 [3]: http://answerhuang.bj.bcebos.com/blog/dsymTool.png
 [4]: http://answerhuang.bj.bcebos.com/blog/crashUUID.png
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
-[6]: http://pan.baidu.com/s/1mg01Qha
-[7]: https://github.com/answer-huang/dSYMTools
+[6]: https://github.com/answer-huang/dSYMTools
 
 
