@@ -241,7 +241,13 @@
         NSLog(@"还未选中 archive 文件");
         return;
     }
-    
+
+    if(_selectedArchiveInfo.archiveFileType == ArchiveFileTypeDSYM){
+        NSLog(@"archive 文件才可导出 ipa 文件");
+        return;
+    }
+
+
     NSString *ipaFileName = [_selectedArchiveInfo.archiveFileName stringByReplacingOccurrencesOfString:@"xcarchive" withString:@"ipa"];
     
     NSSavePanel *saveDlg = [[NSSavePanel alloc]init];
