@@ -86,22 +86,31 @@
 /**
  *  处理给定archive文件路径，获取 archiveinfo 对象
  *
- *  @param archiveFilePaths archvie 文件路径
+ *  @param filePaths archvie 文件路径
  */
-- (void)handleArchiveFileWithPath:(NSArray *)archiveFilePaths {
+- (void)handleArchiveFileWithPath:(NSArray *)filePaths {
     _archiveFilesInfo = [NSMutableArray arrayWithCapacity:1];
-    for(NSString *archivePath in archiveFilePaths){
+    for(NSString *filePath in filePaths){
         ArchiveInfo *archiveInfo = [[ArchiveInfo alloc] init];
-        archiveInfo.archiveFilePath = archivePath;
-        NSString *fileName = archivePath.lastPathComponent;
-        //如果不是 xcarchive 文件路径则继续循环
-        if (![fileName hasSuffix:@".xcarchive"]){
+
+        NSString *fileName = filePath.lastPathComponent;
+        //支持 xcarchive 文件和 dSYM 文件。
+        if ([fileName hasSuffix:@".xcarchive"]){
+            archiveInfo.archiveFilePath = filePath;
+            archiveInfo.archiveFileName = fileName;
+            archiveInfo.archiveFileType = ArchiveFileTypeXCARCHIVE;
+            [self formatArchiveInfo:archiveInfo];
+        }else if([fileName hasSuffix:@".dSYM"]){
+            archiveInfo.dSYMFilePath = filePath;
+            archiveInfo.dSYMFileName = fileName;
+            archiveInfo.archiveFileType = ArchiveFileTypeDSYM;
+            [self formatDSYM:archiveInfo];
+        }else{
             continue;
         }
-        archiveInfo.archiveFileName = fileName;
+
         [_archiveFilesInfo addObject:archiveInfo];
     }
-    [self extraDSYMInfoFromArchiveInfo:_archiveFilesInfo];
 
     [self.archiveFilesTableView reloadData];
 }
@@ -109,44 +118,49 @@
 /**
  *  从 archive 文件中获取 dsym 文件信息
  *
- *  @param archiveFilesPath archive info 对象
+ *  @param archiveInfo archive info 对象
  */
-- (void)extraDSYMInfoFromArchiveInfo:(NSArray *)archiveFilesPath {
+- (void)formatArchiveInfo:(ArchiveInfo *)archiveInfo{
+    NSString *dSYMsDirectoryPath = [NSString stringWithFormat:@"%@/dSYMs", archiveInfo.archiveFilePath];
+    NSArray *keys = @[@"NSURLPathKey",@"NSURLFileResourceTypeKey",@"NSURLIsDirectoryKey",@"NSURLIsPackageKey"];
+    NSArray *dSYMSubFiles= [[NSFileManager defaultManager] contentsOfDirectoryAtURL:[NSURL fileURLWithPath:dSYMsDirectoryPath] includingPropertiesForKeys:keys options:(NSDirectoryEnumerationSkipsHiddenFiles | NSDirectoryEnumerationSkipsPackageDescendants) error:nil];
+    for(NSURL *fileURLs in dSYMSubFiles){
+        if ([[fileURLs.relativePath lastPathComponent] hasSuffix:@"dSYM"]){
+            archiveInfo.dSYMFilePath = fileURLs.relativePath;
+            archiveInfo.dSYMFileName = fileURLs.relativePath.lastPathComponent;
+        }
+    }
+    [self formatDSYM:archiveInfo];
 
+}
+
+/**
+ * 根据 dSYM 文件获取 UUIDS。
+ * @param archiveInfo
+ */
+- (void)formatDSYM:(ArchiveInfo *)archiveInfo{
     //匹配 () 里面内容
     NSString *pattern = @"(?<=\\()[^}]*(?=\\))";
     NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+    NSString *commandString = [NSString stringWithFormat:@"dwarfdump --uuid \"%@\"",archiveInfo.dSYMFilePath];
+    NSString *uuidsString = [self runCommand:commandString];
+    NSArray *uuids = [uuidsString componentsSeparatedByString:@"\n"];
 
-    for(ArchiveInfo *archiveInfo in archiveFilesPath){
-        NSString *dSYMsDirectoryPath = [NSString stringWithFormat:@"%@/dSYMs", archiveInfo.archiveFilePath];
-        NSArray *keys = @[@"NSURLPathKey",@"NSURLFileResourceTypeKey",@"NSURLIsDirectoryKey",@"NSURLIsPackageKey"];
-        NSArray *dSYMSubFiles= [[NSFileManager defaultManager] contentsOfDirectoryAtURL:[NSURL fileURLWithPath:dSYMsDirectoryPath] includingPropertiesForKeys:keys options:(NSDirectoryEnumerationSkipsHiddenFiles | NSDirectoryEnumerationSkipsPackageDescendants) error:nil];
-        for(NSURL *fileURLs in dSYMSubFiles){
-            if ([[fileURLs.relativePath lastPathComponent] hasSuffix:@"dSYM"]){
-                archiveInfo.dSYMFilePath = fileURLs.relativePath;
-                archiveInfo.dSYMFileName = fileURLs.relativePath.lastPathComponent;
-            }
+    NSMutableArray *uuidInfos = [NSMutableArray arrayWithCapacity:1];
+    for(NSString *uuidString in uuids){
+        NSArray* match = [reg matchesInString:uuidString options:NSMatchingReportCompletion range:NSMakeRange(0, [uuidString length])];
+        if (match.count == 0) {
+            continue;
         }
-        NSString *commandString = [NSString stringWithFormat:@"dwarfdump --uuid \"%@\"",archiveInfo.dSYMFilePath];
-        NSString *uuidsString = [self runCommand:commandString];
-        NSArray *uuids = [uuidsString componentsSeparatedByString:@"\n"];
-
-        NSMutableArray *uuidInfos = [NSMutableArray arrayWithCapacity:1];
-        for(NSString *uuidString in uuids){
-            NSArray* match = [reg matchesInString:uuidString options:NSMatchingReportCompletion range:NSMakeRange(0, [uuidString length])];
-            if (match.count == 0) {
-                continue;
-            }
-            for (NSTextCheckingResult *result in match) {
-                NSRange range = [result range];
-                UUIDInfo *uuidInfo = [[UUIDInfo alloc] init];
-                uuidInfo.arch = [uuidString substringWithRange:range];
-                uuidInfo.uuid = [uuidString substringWithRange:NSMakeRange(6, range.location-6-2)];
-                uuidInfo.executableFilePath = [uuidString substringWithRange:NSMakeRange(range.location+range.length+2, [uuidString length]-(range.location+range.length+2))];
-                [uuidInfos addObject:uuidInfo];
-            }
-            archiveInfo.uuidInfos = uuidInfos;
+        for (NSTextCheckingResult *result in match) {
+            NSRange range = [result range];
+            UUIDInfo *uuidInfo = [[UUIDInfo alloc] init];
+            uuidInfo.arch = [uuidString substringWithRange:range];
+            uuidInfo.uuid = [uuidString substringWithRange:NSMakeRange(6, range.location-6-2)];
+            uuidInfo.executableFilePath = [uuidString substringWithRange:NSMakeRange(range.location+range.length+2, [uuidString length]-(range.location+range.length+2))];
+            [uuidInfos addObject:uuidInfo];
         }
+        archiveInfo.uuidInfos = uuidInfos;
     }
 }
 
@@ -271,6 +285,11 @@
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
     ArchiveInfo *archiveInfo= _archiveFilesInfo[row];
+    if(archiveInfo.archiveFileType == ArchiveFileTypeXCARCHIVE){
+        return archiveInfo.archiveFileName;
+    }else if(archiveInfo.archiveFileType == ArchiveFileTypeDSYM){
+        return archiveInfo.dSYMFileName;
+    }
     return archiveInfo.archiveFileName;
 }
 
@@ -283,7 +302,11 @@
     if (subviews.count > 0) {
         if ([identifier isEqualToString:@"name"]) {
             NSTextField *textField = subviews[0];
-            textField.stringValue = archiveInfo.archiveFileName;
+            if(archiveInfo.archiveFileType == ArchiveFileTypeXCARCHIVE){
+                textField.stringValue = archiveInfo.archiveFileName;
+            }else if(archiveInfo.archiveFileType == ArchiveFileTypeDSYM){
+                textField.stringValue = archiveInfo.dSYMFileName;
+            }
         }
     }
     return view;
@@ -397,6 +420,10 @@
         for(NSString *filePath in files){
             if([filePath.pathExtension isEqualToString:@"xcarchive"]){
                 NSLog(@"%@", filePath);
+                [archiveFilePaths addObject:filePath];
+            }
+
+            if([filePath.pathExtension isEqualToString:@"dSYM"]){
                 [archiveFilePaths addObject:filePath];
             }
         }

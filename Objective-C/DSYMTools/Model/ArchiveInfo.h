@@ -7,6 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+
+/**
+ * 文件类型
+ */
+typedef NS_ENUM(NSInteger, ArchiveFileType){
+    // archive 文件
+    ArchiveFileTypeXCARCHIVE = 1,
+    //dsym 文件
+    ArchiveFileTypeDSYM = 2
+};
+
 @class UUIDInfo;
 
 @interface ArchiveInfo : NSObject
@@ -35,5 +46,10 @@
  * uuids
  */
 @property (copy) NSArray<UUIDInfo *> *uuidInfos;
+
+/**
+ * 文件类型
+ */
+@property (assign) ArchiveFileType archiveFileType;
 
 @end
