@@ -438,6 +438,8 @@
             NSLog(@"没有包含任何 xcarchive 文件");
             return NO;
         }
+        
+        [self resetPreInformation];
 
         [self handleArchiveFileWithPath:archiveFilePaths];
 
