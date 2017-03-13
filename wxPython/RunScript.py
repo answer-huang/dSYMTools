@@ -40,7 +40,7 @@ print "moving %s to %s" % (src_path, dest_path)
 shutil.move(src_path, dest_path)
 
 if os.path.exists(dest_path):
-    sqlitedb = "/Applications/dSYM.app/Contents/Resources/dsym.db"
+    sqlitedb = "/Applications/DSYMTools.app/Contents/Resources/dsym.db"
     cx = sqlite3.connect(sqlitedb)
     cu = cx.cursor()
     cu.execute("""create table if not exists archives (file_path varchar(10) unique)""")
