@@ -26,16 +26,16 @@
 
 # 项目简介
 
-来到新公司后，前段时间就一直在忙，前不久  [项目][1] 终于成功发布上线了，最近就在给项目做优化，并排除一些线上软件的 bug，因为项目中使用了友盟统计，所以在友盟给出的错误信息统计中能比较方便的找出客户端异常的信息，可是很多像数组越界却只给出了 `*** -[__NSArrayM objectAtIndex:]: index 50 beyond bounds [0 .. 39]'` 这类错误信息，如下图所示：
+来到新公司后，前段时间就一直在忙，前不久  [项目](https://itunes.apple.com/cn/app/kang-da-yu-zhen-nu-ren-bao/id707364888?l=en&mt=8) 终于成功发布上线了，最近就在给项目做优化，并排除一些线上软件的 bug，因为项目中使用了友盟统计，所以在友盟给出的错误信息统计中能比较方便的找出客户端异常的信息，可是很多像数组越界却只给出了 `*** -[__NSArrayM objectAtIndex:]: index 50 beyond bounds [0 .. 39]'` 这类错误信息，如下图所示：
 
-![errorInfo][2]
+![errorInfo](http://answerhuang.bj.bcebos.com/blog/errorInfo.png)
 
 遇到这种问题如果通过 `objectAtIndex` 去检索错误的地方那将会是一个巨大的工作量。
 
 # dSYM 文件
 
 ### 什么是 dSYM 文件
-Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保存 16 进制函数地址映射信息的中转文件，我们调试的 symbols 都会包含在这个文件中，并且每次编译项目的时候都会生成一个新的 dSYM 文件，位于 `/Users/<用户名>/Library/Developer/Xcode/Archives` 目录下，对于每一个发布版本我们都很有必要保存对应的 Archives 文件 ( [AUTOMATICALLY SAVE THE DSYM FILES][5] 这篇文章介绍了通过脚本每次编译后都自动保存 dSYM 文件)。
+Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保存 16 进制函数地址映射信息的中转文件，我们调试的 symbols 都会包含在这个文件中，并且每次编译项目的时候都会生成一个新的 dSYM 文件，位于 `/Users/<用户名>/Library/Developer/Xcode/Archives` 目录下，对于每一个发布版本我们都很有必要保存对应的 Archives 文件 ( [AUTOMATICALLY SAVE THE DSYM FILES](http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/) 这篇文章介绍了通过脚本每次编译后都自动保存 dSYM 文件)。
 
 
 ### dSYM 文件有什么作用
@@ -69,10 +69,11 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 
 4.将错误地址以及 Slide Address 输入工具的文本框中，点击分析。
 
-![dSYMToos][3]
+![dSYMToos](http://answerhuang.bj.bcebos.com/blog/dsymTool.png)
 
 
-[项目源码地址][6]
+[项目源码地址](https://github.com/answer-huang/dSYMTools)
+
 [1]: https://itunes.apple.com/cn/app/kang-da-yu-zhen-nu-ren-bao/id707364888?l=en&mt=8
 [2]: http://answerhuang.bj.bcebos.com/blog/errorInfo.png
 [3]: http://answerhuang.bj.bcebos.com/blog/dsymTool.png
