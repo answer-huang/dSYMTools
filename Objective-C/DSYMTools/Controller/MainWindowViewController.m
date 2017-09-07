@@ -100,7 +100,7 @@
             archiveInfo.archiveFileName = fileName;
             archiveInfo.archiveFileType = ArchiveFileTypeXCARCHIVE;
             [self formatArchiveInfo:archiveInfo];
-        }else if([fileName hasSuffix:@".dSYM"]){
+        }else if([fileName hasSuffix:@".app.dSYM"]){
             archiveInfo.dSYMFilePath = filePath;
             archiveInfo.dSYMFileName = fileName;
             archiveInfo.archiveFileType = ArchiveFileTypeDSYM;
@@ -125,7 +125,7 @@
     NSArray *keys = @[@"NSURLPathKey",@"NSURLFileResourceTypeKey",@"NSURLIsDirectoryKey",@"NSURLIsPackageKey"];
     NSArray *dSYMSubFiles= [[NSFileManager defaultManager] contentsOfDirectoryAtURL:[NSURL fileURLWithPath:dSYMsDirectoryPath] includingPropertiesForKeys:keys options:(NSDirectoryEnumerationSkipsHiddenFiles | NSDirectoryEnumerationSkipsPackageDescendants) error:nil];
     for(NSURL *fileURLs in dSYMSubFiles){
-        if ([[fileURLs.relativePath lastPathComponent] hasSuffix:@"dSYM"]){
+        if ([[fileURLs.relativePath lastPathComponent] hasSuffix:@"app.dSYM"]){
             archiveInfo.dSYMFilePath = fileURLs.relativePath;
             archiveInfo.dSYMFileName = fileURLs.relativePath.lastPathComponent;
         }
