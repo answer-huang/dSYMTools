@@ -365,23 +365,82 @@
     if(self.selectedArchiveInfo == nil){
         return;
     }
-
+    
     if(self.selectedUUIDInfo == nil){
         return;
     }
-
+    
     if([self.defaultSlideAddressLabel.stringValue isEqualToString:@""]){
         return;
     }
-
+    
     if([self.errorMemoryAddressLabel.stringValue isEqualToString:@""]){
         return;
     }
-
-    NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, self.defaultSlideAddressLabel.stringValue, self.errorMemoryAddressLabel.stringValue];
-    NSString *result = [self runCommand:commandString];
+    NSString *result = @"";
+    NSString *slidValueStr = self.defaultSlideAddressLabel.stringValue;
+    if (slidValueStr.length > 0) {
+        if (![slidValueStr hasPrefix:@"0x"] && ![slidValueStr hasPrefix:@"0X"]) {
+            NSString *memoryAddressToTen = [self sixtyToTen:self.errorMemoryAddressLabel.stringValue];
+            NSInteger memoryAddressTenInt = memoryAddressToTen.integerValue;
+            
+            NSInteger slideAddressTenInt = memoryAddressTenInt - slidValueStr.integerValue;
+            NSString *slideAddressSixTyStr = [self tenToSixTy:slideAddressTenInt];
+            
+            NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, slideAddressSixTyStr, self.errorMemoryAddressLabel.stringValue];
+            result = [self runCommand:commandString];
+            
+        }else{
+            NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, self.defaultSlideAddressLabel.stringValue, self.errorMemoryAddressLabel.stringValue];
+            result = [self runCommand:commandString];
+        }
+    }
     [self.errorMessageView setString:result];
 }
+
+
+
+
+//将十进制转化为十六进制
+-(NSString *)tenToSixTy:(long long int)tmpid
+{
+    NSString *nLetterValue;
+    NSString *str =@"";
+    long long int ttmpig;
+    for (int i = 0; i<9; i++) {
+        ttmpig=tmpid%16;
+        tmpid=tmpid/16;
+        switch (ttmpig)
+        {
+            case 10:
+                nLetterValue =@"A";break;
+            case 11:
+                nLetterValue =@"B";break;
+            case 12:
+                nLetterValue =@"C";break;
+            case 13:
+                nLetterValue =@"D";break;
+            case 14:
+                nLetterValue =@"E";break;
+            case 15:
+                nLetterValue =@"F";break;
+            default:nLetterValue=[[NSString alloc]initWithFormat:@"%lli",ttmpig];
+                
+        }
+        str = [nLetterValue stringByAppendingString:str];
+        if (tmpid == 0) {
+            break;
+        }
+        
+    }
+    return str;
+}
+//十六进制->十进制
+-(NSString *)sixtyToTen:(NSString *)sixTyStr{
+    NSString *temp10 = [NSString stringWithFormat:@"%lu",strtoul([sixTyStr UTF8String],0,16)];
+    return temp10;
+}
+
 
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender{
