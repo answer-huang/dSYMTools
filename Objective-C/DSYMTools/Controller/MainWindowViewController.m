@@ -63,6 +63,7 @@
  */
 @property (unsafe_unretained) IBOutlet NSTextView *errorMessageView;
 
+@property (weak) IBOutlet NSTextField *errorTextField;
 
 
 @property (weak) IBOutlet ArchiveFilesScrollView *archiveFilesScrollView;
@@ -391,7 +392,11 @@
             result = [self runCommand:commandString];
             
         }else{
-            NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, self.defaultSlideAddressLabel.stringValue, self.errorMemoryAddressLabel.stringValue];
+            NSString *memoryAddressToTen = [self sixtyToTen:self.errorMemoryAddressLabel.stringValue];
+            NSInteger memoryAddressTenInt = memoryAddressToTen.integerValue + self.errorTextField.stringValue.integerValue;
+            NSString *slideAddressSixTyStr = [self tenToSixTy:memoryAddressTenInt];
+            
+            NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, self.defaultSlideAddressLabel.stringValue, slideAddressSixTyStr];
             result = [self runCommand:commandString];
         }
     }
