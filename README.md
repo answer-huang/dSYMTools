@@ -1,6 +1,6 @@
 #  优化代码，快速根据友盟反馈定位崩溃信息
 ### 操作方法：将下图中友盟检测崩溃日志中红框内的地址填入，即可快速定位奔溃信息
-
+![image](https://github.com/liunianhuaguoyanxi/Pic/crashLog1.png)
 # 更新：
 ### Version 1.0.5       2016-11-28
 1.支持拖入 dSYM 文件。
