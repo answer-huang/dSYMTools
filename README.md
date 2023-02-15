@@ -2,6 +2,10 @@
 ### 操作方法：将下图中友盟检测崩溃日志中红框内的地址填入，即可快速定位奔溃信息
 ![image](https://github.com/liunianhuaguoyanxi/dSYMTools/blob/master/Pic/crashLog1.png)
 ![image](https://github.com/liunianhuaguoyanxi/dSYMTools/blob/master/Pic/crashLog2.png)
+
+# Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=answer-huang/dSYMTools&type=Date)](https://star-history.com/#answer-huang/dSYMTools&Date)
+
 # 更新：
 ### Version 1.0.5       2016-11-28
 1.支持拖入 dSYM 文件。
@@ -78,8 +82,6 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 
 [项目源码地址](https://github.com/answer-huang/dSYMTools)
 
-## Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=answerhuang-huang/dSYMTools&type=Date)](https://star-history.com/#answer-huang/dSYMTools&Date)
 
 [1]: https://itunes.apple.com/cn/app/kang-da-yu-zhen-nu-ren-bao/id707364888?l=en&mt=8
 [2]: http://answerhuang.bj.bcebos.com/blog/errorInfo.png
