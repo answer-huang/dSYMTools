@@ -78,6 +78,9 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 
 [项目源码地址](https://github.com/answer-huang/dSYMTools)
 
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=answerhuang-huang/dSYMTools&type=Date)](https://star-history.com/#answer-huang/dSYMTools&Date)
+
 [1]: https://itunes.apple.com/cn/app/kang-da-yu-zhen-nu-ren-bao/id707364888?l=en&mt=8
 [2]: http://answerhuang.bj.bcebos.com/blog/errorInfo.png
 [3]: http://answerhuang.bj.bcebos.com/blog/dsymTool.png
