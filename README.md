@@ -6,6 +6,18 @@
 # Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=answer-huang/dSYMTools&type=Date)](https://star-history.com/#answer-huang/dSYMTools&Date)
 
+# Understanding Error Address Calculation Methods
+
+When analyzing crash reports, it's crucial to accurately calculate the error address to pinpoint the source of the crash. There are two primary methods for error address calculation: using an offset (Method 1) and using the direct sum of the offset and the error memory address (Method 2).
+
+Method 1 involves filling in the offset value directly. This method is particularly useful when adapting to error reports collected from systems like Umeng, where the offset is explicitly provided.
+
+Method 2 does not require filling in the offset value. Instead, you directly input the sum of the offset and the error memory address. This method is straightforward and yields the correct error address by directly calculating the sum.
+
+Both methods are correct and will lead to the accurate calculation of the error address. The choice between them depends on the source of the error report. For reports that provide a clear offset value, Method 1 is suitable. For reports where the offset is not explicitly provided, Method 2 offers a direct approach to finding the error address.
+
+Understanding the source of the error report and choosing the appropriate calculation method is essential for accurate error address calculation. This guide aims to clarify the significance and correct usage of both methods, ensuring precise error analysis.
+
 # 更新：
 ### Version 1.0.5       2016-11-28
 1.支持拖入 dSYM 文件。
@@ -89,5 +101,4 @@ Xcode编译项目后，我们会看到一个同名的 dSYM 文件，dSYM 是保�
 [4]: http://answerhuang.bj.bcebos.com/blog/crashUUID.png
 [5]: http://www.cimgf.com/2009/12/23/automatically-save-the-dsym-files/
 [6]: https://github.com/answer-huang/dSYMTools
-
 
