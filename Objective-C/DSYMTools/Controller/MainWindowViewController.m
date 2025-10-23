@@ -91,10 +91,20 @@
  */
 - (void)handleArchiveFileWithPath:(NSArray *)filePaths {
     _archiveFilesInfo = [NSMutableArray arrayWithCapacity:1];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
     for(NSString *filePath in filePaths){
         ArchiveInfo *archiveInfo = [[ArchiveInfo alloc] init];
 
         NSString *fileName = filePath.lastPathComponent;
+        
+        // 获取文件创建时间
+        NSError *error = nil;
+        NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:filePath error:&error];
+        if (!error && fileAttributes) {
+            archiveInfo.creationDate = [fileAttributes fileCreationDate];
+        }
+        
         //支持 xcarchive 文件和 dSYM 文件。
         if ([fileName hasSuffix:@".xcarchive"]){
             archiveInfo.archiveFilePath = filePath;
@@ -112,6 +122,11 @@
 
         [_archiveFilesInfo addObject:archiveInfo];
     }
+    
+    // 按创建时间倒序排列（最新的在前面）
+    [_archiveFilesInfo sortUsingComparator:^NSComparisonResult(ArchiveInfo *obj1, ArchiveInfo *obj2) {
+        return [obj2.creationDate compare:obj1.creationDate];
+    }];
 
     [self.archiveFilesTableView reloadData];
 }

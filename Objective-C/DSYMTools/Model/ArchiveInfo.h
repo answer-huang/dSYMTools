@@ -52,4 +52,9 @@ typedef NS_ENUM(NSInteger, ArchiveFileType){
  */
 @property (assign) ArchiveFileType archiveFileType;
 
+/**
+ * 文件创建时间
+ */
+@property (strong) NSDate *creationDate;
+
 @end
