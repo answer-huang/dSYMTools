@@ -350,6 +350,12 @@
         radioButton.tag = idx + 1;
         [radioButton setAction:@selector(radioButtonAction:)];
         [self.radioBox.contentView addSubview:radioButton];
+        
+        // 默认选中第一个 radioButton 并触发 action
+        if (idx == 0) {
+            [radioButton setState:NSControlStateValueOn];
+            [self radioButtonAction:radioButton];
+        }
     }];
 }
 
